@@ -22,4 +22,4 @@ COPY . /app/
 EXPOSE 8080
 RUN python manage.py collectstatic --no-input
 # Command to run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8080","reddit.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080","system.wsgi:application"]
