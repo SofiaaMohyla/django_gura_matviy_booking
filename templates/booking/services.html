@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<style>
+    .h1-services{
+        font: 600'Source Sans Pro', sans-serif;
+        text-align: center;
+}
+</style>
+
+<div class="row">
+    <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class = "main-10">
+                <h1 class="h1-services">Services</h1>
+                <br>
+                    <div class="container">
+                        <div class="row">
+                {% for service in services %}
+                        <div class="col-md-4">
+                            <div class="card" style="width:350px">
+                              <div class="card-body">
+                                <h4 class="card-title">{{ service.name }}</h4>
+                                <p class="card-text">{{ service.description }}</p>
+                                <h4 class="card-title">{{ service.charge }}</h4>
+                              </div>
+                            </div>
+                        </div>
+                    <hr>
+                {% endfor %}
+                        </div>
+                    </div>
+                <br>
+                <h1 class="h1-services">Employes</h1>
+                <br>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        {% for employe in employes %}
+                        <div class="col-md-4">
+                            <div class="card" style="width:350px">
+                              <div class="card-body">
+                                <h4 class="card-title">{{ employe.first_name }} {{ employe.last_name }}</h4>
+                                <p class="card-text">Position: {{ employe.position }}</p>
+                                <h4 class="card-title">Email: {{ employe.email }}</h4>
+                              </div>
+                            </div>
+                        </div>
+                    <hr>
+                {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-md-1"></div>
+</div>
+
+{% endblock %}

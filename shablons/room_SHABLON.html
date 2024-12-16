@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../staticfiles/styles.css">
+    <script src = "../static/js/myjs.js"></script>
+    <title>Booking</title>
+</head>
+<body>
+    <nav class="sticky-top header">
+        <div class="row">
+            <div class="col-md-1">
+              <img src = "../static/images/nav-icon.svg" class ="company-icon">
+            </div>
+            <div class="col-md-4">
+                <div class="all-a">
+                    <a href = "{% url 'home' %}" class="a-nav"> Home</a> |
+                    <a href ="{% url 'rooms' %}" class="a-nav"> Rooms</a> |
+                    <a href = "#" class="a-nav">Services</a> |
+                </div>
+            </div>
+            <div class = "col-md-6"></div>
+            <div class = col-md-1>
+                <img src = "../static/images/user-icon.png" class ="user-icon">
+            </div>
+        </div>
+
+    </nav>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class = "main-10">
+                <br>
+                <br>
+                <h1 class="txt-rooms" style="text-align: center">Room #1</h1>
+                <br>
+                <br>
+                <div id="demo" class="carousel slide" data-ride="carousel">
+                     <ul class="carousel-indicators">
+                         <li data-target="#demo" data-slide-to="0" class="active"></li>
+                         <li data-target="#demo" data-slide-to="1"></li>
+                     </ul>
+
+                     <div class="carousel-inner">
+                         <div class="carousel-item active">
+                             <img src="../static/images/room_details/1-room-photo.webp" class = "img-slide">
+                         </div>
+                            <div class="carousel-item">
+                                <img src="../static/images/room_details/2-room-photo.jpg" class = "img-slide">
+                            </div>
+                     </div>
+                     <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                         <span class="carousel-control-prev-icon"></span>
+                     </a>
+                     <a class="carousel-control-next" href="#demo" data-slide="next">
+                         <span class="carousel-control-next-icon"></span>
+                     </a>
+                 </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="div-txt-room-det">
+                    <p> Ласкаво просимо до нашого розкішного готельного номеру! Тут ви знайдете все необхідне для комфортного відпочинку. Просторий і стильний інтер'єр створює атмосферу затишку і спокою. Велике ліжко з м'яким матрацом і високоякісною постільною білизною забезпечить вам солодкий сон.
+        З номеру відкривається чудовий вид на море, який можна насолоджуватися з приватного балкону. Сучасна ванна кімната оснащена душовою кабіною, розкішним набором туалетного приладдя і пухнастими рушниками.
+        Для вашого комфорту номер обладнаний кондиціонером, міні-баром, телевізором з плоским екраном і супутниковими каналами, а також безкоштовним Wi-Fi. Зона відпочинку з м'яким кріслом та журнальним столиком ідеально підходить для релаксації після насиченого дня.
+        Проведіть незабутній час у нашому готелі, насолоджуючись найвищим рівнем комфорту і сервісу.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h2 class="h2-price-det"><span class="price-room-det">2000$</span></h2>
+                        <br>
+                        <br>
+                        <h2 class="h2-price-det"><span class="rating-room-det">99.99☆</span></h2>
+                        <br>
+                        <br>
+                        <h2 class="txt-rooms">{{ room.capacity }}<img src = "{% static './images/rooms/people-room.png' %}" class = "img-room-card-people"></h2>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info btn-add-review" onclick="show_adding_review()">+</button>
+                    </div>
+                    <div class="col-md-5"></div>
+                </div>
+                <br>
+                <br>
+                <div id="form-add-review"  style="display:none">
+                    <form method="POST" action="{% url 'add-review' room.id %}" class="form">
+                        <label for ="review-rating">Rating: </label>
+                        <input type="number" name="review-rating" id="review-rating" class="form-control" required>
+                        <label for ="review-comment">Comment: </label>
+                        <textarea name="review-comment" id="review-comment" cols="5" rows="10" class="form-control" required ></textarea>
+                        <br>
+                        <button type="submit" class = "btn btn-primary">Add</button>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <button class="btn btn-danger btn-hide-review" onclick="hide_adding_review()">×</button>
+                        </div>
+                        <div class="col-md-5"></div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="div-review">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <img src = "../static/images/user-icon.png" class="img-reviewer">
+                        </div>
+                        <div class="col-md-11">
+                            <h4  class="txt-rooms">Matviy Hura</h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <br>
+                    <p class = "txt-review">Goooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooood!!!</p>
+                    <br>
+                    <hr>
+                    <div class = "row">
+                        <div class = "col-md-6">
+                            <p class = "review-date">04.08.2024</p>
+                        </div>
+                        <div class = "col-md-6">
+                            <p class = "review-rating">98.00☆</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</body>
+</html>

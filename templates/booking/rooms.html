@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <br>
+                <div class = "main-10">
+                    <div class="row"> 
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-10">
+                            <form method="POST" action="{% url 'rooms' %}">
+                                {% csrf_token %}
+                                <input type="number" name = "search-room-capacity" id = "search-room-capacity" placeholder="Вкажи вміст кімнати" class="form-control">
+                                <button type="submit" class ="btn btn-primary">Search</button>
+                            </form>
+                            {% for room in rooms %}
+                            <br>
+                            <br>
+                            <div class="room-card">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src = "{% static './images/rooms/room1.png' %}" class="img-room">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class = "col-md-9">
+                                                <h4 class = "h-txt-rooms-card">Room #{{ room.number }}</h4>
+                                                <h5 class = "txt-rooms">Capacity: {{ room.capacity }} <img src = "{% static './images/rooms/people-room.png' %}" class = "img-room-card-people"></h5>
+                                                <p class="p-txt-rooms-card">{{ room.mini_description }}</p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <h5 class="rating-div-card"><span class="rating-card">{{ room.rating }}</span></h5>
+                                                <h4><span class="price-room-card">{{ room.price_per_night }}$</span></h4>
+
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <div class="row">
+                                            <div class = "col-md-6">
+                                                <a href ="{% url 'room-details' room.id %}"><button class="btn btn-primary">Детальніше --></button></a>
+                                            </div>
+                                            <div class = "col-md-6">
+                                                <a href="{% url 'book-room-page' room.id %}"><button class="btn btn-primary">Забронювати --></button></a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <br>
+                            <hr>
+                            <br>
+                            <h2 class="txt-rooms">Add room</h2>
+                            <hr>
+                            <br>
+                            {% if request.user.is_authenticated %}
+                                <div class="row">
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-info btn-add-review" onclick="show_adding_room()">+</button>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                    <br>
+                                </div>
+                                <br>
+                                <div id="form-add-room" style="display:none">
+                                    <form  method="POST" action="{% url 'add-room' %}">
+                                            {% csrf_token %}
+                                          <label for="room-number" class="mr-sm-2 ">Room number:</label>
+                                          <input type="number" class="form-control mb-2 mr-sm-2" placeholder="Enter number" id="room-number" name="room-number" required>
+
+                                          <label for="room-capacity" class="mr-sm-2">Capacity:</label>
+                                          <input type="number" class="form-control mb-2 mr-sm-2" placeholder="Enter capacity" id="room-capacity" name="room-capacity" required>
+
+                                            <label for="room-description" class="mr-sm-2">Description:</label>
+                                            <textarea class="form-control mb-2 mr-sm-2" placeholder="Enter description" id="room-description" name="room-description" rows="10" cols="20" required></textarea>
+
+                                            <label for="room-mini-description" class="mr-sm-2">Mini description:</label>
+                                            <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter mini description" id="room-mini-description" name="room-mini-description" required>
+
+
+                                            <label for="room-price-per-night" class="mr-sm-2">Price per night:</label>
+                                            <input type="number" class="form-control mb-2 mr-sm-2" placeholder="Enter price per night" id="room-price-per-night" name="room-price-per-night" required>
+
+                                            <label for="room-rating" class="mr-sm-2">Rating:</label>
+                                            <input type="number" class="form-control mb-2 mr-sm-2" placeholder="Enter rating" id="room-rating" name="room-rating" required>
+
+                                            <div class="form-group">
+                                                <label for="select-type-room">Payment method:</label>
+                                                <select class="form-control" id="select-type-room" name="select-type-room" required>
+                                                    <option value="Standard">Standard</option>
+                                                    <option value="Deluxe">Deluxe</option>
+                                                    <option value="Suite">Suite</option>
+                                                </select>
+                                            </div>
+                                          <button type="submit" class="btn btn-primary mb-2">Add room</button>
+                                    </form>
+                                <div class="row">
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-danger btn-hide-review" onclick="hide_adding_room()">×</button>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                </div>
+                            </div>
+                            {% else %}
+
+                                <a href = "{% url 'login' %}" style="text-align:center"><button class="btn btn-primary">Login</button></a>
+
+                            {% endif %}
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+
+    <script>
+
+    </script>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .warn-card{
+        background-color: #fc515f;
+        color: black;
+        font: 600 'Source Sans Pro', sans-serif;
+        width: 700px;
+        height: auto;
+        border-radius: 30px;
+        padding: 10px;
+        text-align: center;
+    }
+    .label-booking{
+        font: 600 25px 'Source Sans Pro', sans-serif;
+    }
+</style>
+
+
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <br>
+            <div class = "main-10">
+                {% if warn_message %}
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="warn-card">
+                            <h1>{{ warn_message|safe }}</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            {% endif %}
+{% if request.user.is_authenticated %}
+
+    <form method="POST" action="{% url 'book-room' room.id user.id %}">
+        {% csrf_token %}
+        <label for="booking_check_in_date" class="label-booking">Дата заселення:</label>
+        <input type="datetime-local" name="booking_check_in_date" id="booking_check_in_date" class="form-control" required>
+
+        <label for="booking_check_out_date" class="label-booking">Дата виселення</label>
+        <input type="datetime-local" name="booking_check_out_date" id="booking_check_out_date" class="form-control" required>
+
+        <div class="form-group">
+            <label for="sel1" class="label-booking">Payment method:</label>
+            <select class="form-control" id="sel1" name="payment_method"  required>
+                <option value="Pay by card">Pay by card</option>
+                <option value="Pay in cash">Pay in cash</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-info">Book</button>
+    </form>
+
+{% else %}
+
+<h1>Ви не авторизовані</h1>
+<a href="{% url 'login' %}">Login</a>
+
+{% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

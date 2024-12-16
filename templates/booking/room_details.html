@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class = "main-10">
+                <br>
+                <br>
+                <h1 class="txt-rooms" style="text-align: center">Room #{{ room.number }}</h1>
+                <br>
+                <br>
+                <div id="demo" class="carousel slide" data-ride="carousel">
+                     <ul class="carousel-indicators">
+                         <li data-target="#demo" data-slide-to="0" class="active"></li>
+                         <li data-target="#demo" data-slide-to="1"></li>
+                     </ul>
+
+                     <div class="carousel-inner">
+                         <div class="carousel-item active">
+                             <img src="{% static './images/room_details/1-room-photo.webp' %}" class = "img-slide">
+                         </div>
+                            <div class="carousel-item">
+                                <img src="{% static './images/room_details/2-room-photo.jpg' %}" class = "img-slide">
+                            </div>
+                     </div>
+                     <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                         <span class="carousel-control-prev-icon"></span>
+                     </a>
+                     <a class="carousel-control-next" href="#demo" data-slide="next">
+                         <span class="carousel-control-next-icon"></span>
+                     </a>
+                 </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="div-txt-room-det">
+                            <p> {{  room.description }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h2 class="h2-price-det"><span class="price-room-det">{{ room.price_per_night }}$</span></h2>
+                        <br>
+                        <br>
+                        <h2 class="h2-price-det"><span class="rating-room-det">{{ room.rating }}☆</span></h2>
+                        <br>
+                        <br>
+                        <h2 class="txt-rooms">{{ room.capacity }}<img src = "{% static './images/rooms/people-room.png' %}" class = "img-room-card-people"></h2>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {% if request.user.is_authenticated %}
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info btn-add-review" onclick="show_adding_review()">+</button>
+                    </div>
+                    <div class="col-md-5"></div>
+                </div>
+                <br>
+                <br>
+                    <div id="form-add-review"  style="display:none">
+                        <form method="POST" action="{% url 'add-review' room.id user.id %}" class="form">
+                            {% csrf_token %}
+                            <label for ="review-rating">Rating: </label>
+                            <input type="number" name="review-rating" id="review-rating" class="form-control" required>
+                            <label for ="review-comment">Comment: </label>
+                            <textarea name="review-comment" id="review-comment" cols="5" rows="10" class="form-control" required ></textarea>
+                            <br>
+                            <button type="submit" class = "btn btn-primary">Add</button>
+                        </form>
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-danger btn-hide-review" onclick="hide_adding_review()">×</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                    </div>
+                {% else %}
+
+                <a href = "{% url 'login' %}">Login</a>
+
+                {% endif %}
+                <br>
+                {% for review in reviews %}
+                    <br>
+                    <br>
+                    <div class="div-review">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img src = "{% static './images/user-icon.png' %}" class="img-reviewer">
+                            </div>
+                            <div class="col-md-11">
+                                <h4  class="txt-rooms">{{ review.user.first_name }} {{ review.user.last_name }}</h4>
+                            </div>
+                        </div>
+                        <hr>
+                        <br>
+                        <p class = "txt-review">{{ review.comment }}</p>
+                        <br>
+                        <hr>
+                        <div class = "row">
+                            <div class = "col-md-6">
+                                <p class = "review-date">{{review.review_date}}</p>
+                            </div>
+                            <div class = "col-md-6">
+                                <p class = "review-rating">{{review.rating}}☆</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+
+.a-nav {
+    font: 600 25px 'Source Sans Pro', sans-serif;
+    text-decoration: none;
+    color: #ffffff;
+
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.a-nav:hover{
+    text-decoration: none;
+    color: #ffffff;
+
+}
+
+.header {
+    background-color:#375BDC;
+    color:#ffffff;
+    height: 70px;
+    max-width: 100%;
+
+}
+
+.all-a{
+    text-align:left;
+    padding-top: 15 px;
+}
+
+.company-icon{
+    height: 70px;
+    width: 70px;
+    padding-top: 10px;
+    padding-bottom:10px;
+}
+.user-icon{
+    height: 65px;
+    width: 65px;
+    padding-top: 5px;
+}
+
+.img-slide {
+    width: 1521px;
+    height: 1000px;
+}
+
+.home-message-div{
+    height: 100px;
+    width: 700px;
+    background-color: #375BDC;
+    border: 4px double gainsboro;
+    border-radius: 25px 25px 25px 5px;
+}
+
+.home-message-div p{
+
+    color: #ffffff;
+    font: 600 20px 'Source Sans Pro', sans-serif;
+}
+
+.card-service{
+    border-radius: 15px;
+    width: 200px;
+    border: 1px solid lightgrey;
+    height: 300px;
+}
+
+.img-home-service{
+    width: 200px;
+    height:auto;
+    border-radius: 15px 10px;
+}
+
+
+body {
+    background-color:#f5f5dc;
+}
+
+.main-10{
+    background-color: #ffffff;
+    border: 1px solid white;
+    border-radius: 40px;
+    padding: 20px;
+}
+
+.img-room{
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+
+.room-card{
+    max-width: 90%;
+    height:auto;
+    border: 1px solid #D3D3D3;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.txt-rooms{
+    font: 600 'Source Sans Pro', sans-serif;
+}
+.h-txt-rooms-card{
+    text-align: center;
+    font: 600 'Source Sans Pro', sans-serif;
+
+}
+
+.div-buttons-rooms-card {
+    margin-left: 270px;
+    margin-top: 100px;
+}
+
+.img-room-card-people{
+    width: 25px;
+    height:auto;
+}
+
+.room-card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.p-txt-rooms-card{
+    font: 600 13px 'Source Sans Pro', sans-serif;
+}
+
+.rating-card{
+    font: 600 'Source Sans Pro', sans-serif;
+    background-color: #1f409c;
+    color: #ffffff;
+    border-radius: 4px;
+    text-align: right;
+}
+
+.rating-div-card{
+    margin-left: 50px;
+}
+
+.price-room-card{
+    background-color: yellow;
+    font: 600 'Source Sans Pro', sans-serif;
+    border-radius: 4px;
+    color: black;
+    padding: 1px;
+}
+
+.div-txt-room-det{
+    font: 600 23px 'Source Sans Pro', sans-serif;
+    background-color: #ffea8c;
+    padding: 10px;
+    border-radius: 30px;
+
+}
+
+.price-room-det{
+    background-color: yellow;
+    font: 600 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    color: black;
+    padding: 10px;
+}
+.h2-price-det{
+    text-align: right;
+}
+.rating-room-det{
+    background-color: lightblue;
+    font: 600 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    color: black;
+    padding: 10px;
+}
+
+.div-review{
+    background-color: #fce0de;
+    border-radius: 20px;
+    padding: 10px;
+}
+.img-reviewer{
+    width: 50px;
+    height: auto;
+    margin-left: 20px;
+
+}
+
+.review-date{
+    text-align: left;
+    font: 600 21px 'Source Sans Pro', sans-serif;
+}
+
+.review-rating{
+    text-align: right;
+    font: 600 21px 'Source Sans Pro', sans-serif;
+}
+
+.txt-review{
+    font: 600 20px 'Source Sans Pro', sans-serif;
+}
+
+.btn-add-review{
+    font-size: 30px;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    background-color: lightblue;
+    border: 2px solid white;
+    text-align: center;
+    vertical-align:center;
+}
+
+
+
+.btn-hide-review{
+    font-size: 30px;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    background-color: lightcoral;
+    border: 2px solid white;
+    text-align: center;
+    vertical-align:center;
+}
+
+
+
+
+
+
+
+
+
+

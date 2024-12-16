@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<hr>
+{% for bsue in bsues %}
+<h2 style="text-align:center; font: 600 'Source Sans Pro', sans-serif;">{{ bsue.service.name }} - {{ bsue.service.charge }}</h2>
+<hr>
+{% endfor %}
+
+{% endblock %}

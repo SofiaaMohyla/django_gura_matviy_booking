@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+
+    .user-data{
+        text-align: center;
+        vertical-align: center;
+    }
+    .user-flname{
+        font: 600 50px 'Source Sans Pro', sans-serif;
+    }
+
+
+
+    .img-user{
+        max-width: 100%;
+        height: auto;
+    }
+    .txt-font{
+        font: 600 'Source Sans Pro', sans-serif;
+    }
+    .booking-card{
+        background-color: #e3cacb;
+        border-radius: 30px;
+        padding: 20px;
+    }
+    .payment-card{
+        background-color: #8ae9ff;
+        border-radius: 30px;
+        padding: 10px;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <br>
+        <div class = "main-10">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="user-data">
+                        <p class = "user-flname">{{ user.first_name }} {{ user.last_name }}</p>
+                        <br>
+                        <h4 class="txt-font">{{ user.username }}</h4>
+                        <br>
+                        <h4 class="txt-font">{{ user.phone_number }}</h4>
+                    </div>
+                </div>
+                 <div class="col-md-6">
+                    <img src="{% static './images/user/user.webp' %}" class="img-user">
+                </div>
+            </div>
+                <hr>
+
+                <h2 style="text-align:center" class="txt-font" >BOOKINGS</h2>
+                <hr>
+                <br>
+                {% for booking in bookings %}
+                    <div class="booking-card">
+                        <h3 class="txt-font" style="text-align:center" >Booking #{{ booking.id }}</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="txt-font" style="text-align:center">Room #{{ booking.room.number }}</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="txt-font" style="text-align:center">Check in date: {{ booking.check_in_date }}</h4>
+                                <br>
+                                <h4 class="txt-font" style="text-align:center">Check out date: {{ booking.check_out_date }}</h4>
+                            </div>
+                        </div>
+                        <br>
+                         <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-info btn-add-review" onclick="show_se()">+</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                        <br>
+                        <div id="form-service-employe" style="display:none">
+                            <form method="POST" action="{% url 'add-service-to-booking' booking.id user.id %}">
+                                {% csrf_token %}
+                              <label for="sel1">Service:</label>
+                              <select id="sel1" name = "service-booking" class="form-control" required>
+                                  {% for service in services %}
+                                  <option value = "{{ service.id }}">{{ service.name }} - {{ service.charge }}$</option>
+                                  {% endfor %}
+                              </select>
+                                <label for="sel2">Employe:</label>
+                              <select id="sel2" name = "employe-booking" class="form-control" required>
+                                  {% for employe in employes %}
+                                  <option value = "{{ employe.id }}">{{ employe.first_name }} {{ employe.last_name }} - {{ employe.position }}</option>
+                                  {% endfor %}
+                              </select>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Add service to booking</button>
+                            </form>
+                            <br>
+                             <div class="row">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-danger btn-hide-review" onclick="hide_se()">×</button>
+                                </div>
+                                <div class="col-md-5"></div>
+                            </div>
+                            <br>
+                        </div>
+                    <hr>
+                    <a href = "{% url 'booking-services' booking.id %}"><button class="btn btn-info">Services</button></a>
+                    </div>
+                    <br>
+                {% endfor %}
+                <h2 style="text-align:center" class="txt-font">PAYMENTS</h2>
+                <hr>
+                <br>
+
+                <br>
+                <div
+                {% for payment in payments %}
+                    <div class="payment-card">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6 class="txt-font">Room #{{ payment.booking.room.number }}</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 class="txt-font">Payment date: {{ payment.payment_date }}</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 class="txt-font">Method: {{ payment.payment_method }}</h6>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 class="txt-font">Booking #{{ payment.booking.id }}</h6>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form method="POST" action="{% url 'pay-payment' payment.id user.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-secondary">Оплатити</button>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="text-align:right;"><span style=" background-color: yellow; padding:3px; border-radius: 5px;">{{ payment.full_price }}$</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+        </div>
+        <a href="{% url 'log-out' %}">Log out </a>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+{% endblock %}
